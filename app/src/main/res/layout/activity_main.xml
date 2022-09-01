@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/istockphoto_1176474358_612x612" />
 
     <Button
@@ -60,7 +61,7 @@
         app:layout_constraintVertical_bias="0.306" />
 
     <EditText
-        android:id="@+id/psswordBox"
+        android:id="@+id/passwordBox"
         android:layout_width="267dp"
         android:layout_height="57dp"
         android:ems="10"
@@ -73,28 +74,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.459" />
 
-    <EditText
-        android:id="@+id/signUpTxt"
-        android:layout_width="240dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Didn't Sign Up? Click Here!"
-        android:textColor="#FFC107"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/loginText"
         android:layout_width="211dp"
         android:layout_height="74dp"
         android:fontFamily="cursive"
         android:lineSpacingExtra="8sp"
-        android:text="TextView"
+        android:text="Login"
         android:textAlignment="center"
         android:textColor="#FF9800"
         android:textSize="60sp"
@@ -104,5 +90,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.155"
         tools:text="Login" />
+
+    <TextView
+        android:id="@+id/signupText"
+        android:layout_width="279dp"
+        android:layout_height="44dp"
+        android:text="Didn't Sign Up? Click Below!"
+        android:textColor="#FF9800"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/signUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logIn"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
