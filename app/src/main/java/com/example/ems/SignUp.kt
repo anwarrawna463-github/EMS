@@ -18,14 +18,30 @@ class SignUp : AppCompatActivity() {
         passwordSignUp=findViewById(R.id.passwordSignUp)
         registerBtn=findViewById(R.id.register)
         db=Database(this)
-        registerBtn.setOnClickListener { addUser(emailSignUp.text.toString(),passwordSignUp.text.toString()) }
+        registerBtn.setOnClickListener {
+            addUser(emailSignUp.text.toString(), passwordSignUp.text.toString())
+        }
     }
     private fun addUser(email:String,password:String){
         if(email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "cannot save blank data!", Toast.LENGTH_SHORT).show()
-        }else {
-            val obj = Model(email, password)
-            db.put(obj)
         }
+        else {
+            if (isValidEmail(email)) {
+                val obj = Model(email, password)
+                db.put(obj)
+                Toast.makeText(this,"User added successfully!",Toast.LENGTH_LONG).show()
+                emailSignUp.text.clear()
+                passwordSignUp.text.clear()
+            }
+            else{
+                Toast.makeText(this,"Not a valid email,try again!",Toast.LENGTH_LONG).show()
+                emailSignUp.text.clear()
+                passwordSignUp.text.clear()
+            }
+        }
+    }
+    private fun isValidEmail(email:String):Boolean{
+        return Regex("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+").matches(email)
     }
 }

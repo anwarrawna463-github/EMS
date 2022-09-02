@@ -22,31 +22,23 @@ class MainActivity : AppCompatActivity() {
         signUpBtn=findViewById(R.id.signUp)
         db=Database(this)
         loginBtn.setOnClickListener {
-            val email=emailBox.text.toString()
-            //val password=passwordBox.text.toString()
-            val bl=db.isExist(email)
-            if(!bl)
-            Toast.makeText(this,"not exist",Toast.LENGTH_LONG).show()
-            /*if (!isValidEmail(email)) {
-                println("Not a valid email")
+            var email= this.emailBox.text.toString()
+            val password=this.passwordBox.text.toString()
+            if(!db.isExist(email)) {
+                Toast.makeText(this, "User does not exist", Toast.LENGTH_LONG).show()
+            }else{
+                if (db.checkPassword(email, password))
+                {
+                    Toast.makeText(this, "Login was successful!", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(this, "Incorrect password", Toast.LENGTH_LONG).show()
+                }
             }
-            if (!db.isExist(email)) {
-                println("User does not exist")
-            }
-            if (checkPassword(email, password))
-            fun isValidEmail(email:String):Boolean{
-                return Regex("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+").matches(email)
-            }
-            fun checkPassword(email:String,password:String):Boolean{
-                return database[email].equals(password)
-            }*/
         }
         signUpBtn.setOnClickListener {
             val act=Intent(this,SignUp::class.java)
-            startActivity(act) }
+            startActivity(act)
+        }
 
-    }
-    private fun isValidEmail(email:String):Boolean{
-        return Regex("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+").matches(email)
     }
 }

@@ -26,13 +26,7 @@ class Database(context: Context): SQLiteOpenHelper(context,db_name,null,db_versi
         db?.execSQL(query)
         onCreate(db)
     }
-    fun isExist(email:String):Boolean{
-        val db=readableDatabase
-        val rs=db.rawQuery("SELECT * FROM $tbl_name where email=?", arrayOf(email))
-        db.close()
-        if (rs.moveToFirst()) return true
-        return false
-    }
+
     fun put(data:Model): Boolean {
         val db:SQLiteDatabase=writableDatabase
         val cv= ContentValues()
@@ -41,6 +35,16 @@ class Database(context: Context): SQLiteOpenHelper(context,db_name,null,db_versi
         val result=db.insert(tbl_name,null,cv)
         db.close()
         if(result>0) return true
+        return false
+    }
+    fun isExist(email:String):Boolean{
+        val db: SQLiteDatabase =readableDatabase
+        val rs:Cursor=db.rawQuery("SELECT * FROM $tbl_name where email=?", arrayOf(email))
+        if (rs.moveToFirst()) {
+            db.close()
+            return true
+        }
+        db.close()
         return false
     }
     @SuppressLint("Range")
@@ -52,14 +56,24 @@ class Database(context: Context): SQLiteOpenHelper(context,db_name,null,db_versi
         var email:String
         var password:String
         if(cursor.moveToFirst()){
-            do {
+            do{
                 email=cursor.getString(cursor.getColumnIndex(em))
                 password=cursor.getString(cursor.getColumnIndex(pwd))
                 val model=Model(email,password)
                 list.add(model)
             }while (cursor.moveToNext())
         }
+        db.close()
         return list
+    }
+    fun checkPassword(email:String,password:String):Boolean{
+        val db: SQLiteDatabase =readableDatabase
+        val rs:Cursor=db.rawQuery("SELECT $pwd FROM $tbl_name WHERE $em=?", arrayOf(email))
+        rs.moveToFirst()
+        val passwordFromTbl=rs.getString(0)
+        db.close()
+        if (passwordFromTbl.equals(password)) return true
+        return false
     }
 
 
